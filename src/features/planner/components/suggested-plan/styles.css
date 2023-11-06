@@ -1,0 +1,26 @@
+.plan {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: auto;
+    margin-bottom: 2rem;
+}
+
+.travel-plan {
+    margin-bottom: 1rem;
+    background: var(--white-color);
+    padding: 1rem;
+}
+
+.day {
+    font-weight: bold;
+    margin-right: 1rem;
+}
+
+.time {
+    color: #555;
+}
+
+.description {
+    margin-left: 20px;
+}

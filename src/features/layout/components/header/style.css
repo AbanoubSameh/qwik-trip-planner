@@ -1,0 +1,9 @@
+header {
+    height: var(--header-height);
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}

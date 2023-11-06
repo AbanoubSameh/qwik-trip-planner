@@ -1,0 +1,33 @@
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.form-control {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-bottom: 1rem;
+}
+
+.form-control+.form-control {
+    margin-left: 1rem;
+}
+
+button[type="submit"] {
+    width: 100px;
+    height: 40px;
+    align-self: end;
+}
+
+.form-error {
+    color: var(--error-color);
+    font-size: 14px;
+}

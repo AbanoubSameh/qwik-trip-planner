@@ -1,38 +1,23 @@
-import { component$, Slot, useStyles$ } from "@builder.io/qwik";
-import { routeLoader$ } from "@builder.io/qwik-city";
-import type { RequestHandler } from "@builder.io/qwik-city";
-
-import Header from "~/components/starter/header/header";
-import Footer from "~/components/starter/footer/footer";
+import { component$, Slot, useStyles$, useStylesScoped$ } from "@builder.io/qwik";
 
 import styles from "./styles.css?inline";
+import globalCssVariables from "../theme/variables.css?inline"
+import layoutStyles from "./layout-styles.css?inline";
+import Header from "~/features/layout/components/header";
 
-export const onGet: RequestHandler = async ({ cacheControl }) => {
-  // Control caching for this request for best performance and to reduce hosting costs:
-  // https://qwik.builder.io/docs/caching/
-  cacheControl({
-    // Always serve a cached response by default, up to a week stale
-    staleWhileRevalidate: 60 * 60 * 24 * 7,
-    // Max once every 5 seconds, revalidate on the server to get a fresh version of this page
-    maxAge: 5,
-  });
-};
-
-export const useServerTimeLoader = routeLoader$(() => {
-  return {
-    date: new Date().toISOString(),
-  };
-});
 
 export default component$(() => {
   useStyles$(styles);
+  useStyles$(globalCssVariables);
+  useStylesScoped$(layoutStyles);
   return (
     <>
-      <Header />
-      <main>
-        <Slot />
-      </main>
-      <Footer />
+      <div class="main">
+        <Header />
+        <main>
+          <Slot />
+        </main>
+      </div>
     </>
   );
 });

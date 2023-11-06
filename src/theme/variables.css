@@ -1,0 +1,15 @@
+:root {
+    --white-color: #fff;
+    --gray-color: #f5f5f5;
+    --primary-color: #153a60;
+    --secondary-color: #fff;
+    --warning-color: #ffcc00;
+    --error-color: #ff0000;
+    --global-font: 'Roboto', sans-serif;
+
+    --header-height: 60px;
+}
+
+body {
+    font-family: var(--global-font);
+}
