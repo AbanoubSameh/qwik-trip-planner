@@ -7,20 +7,23 @@
 }
 
 .travel-plan {
-    margin-bottom: 1rem;
-    background: var(--white-color);
-    padding: 1rem;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid black;
 }
 
 .day {
     font-weight: bold;
-    margin-right: 1rem;
+    margin-right: 5px;
 }
 
 .time {
-    color: #555;
+    color: #999999;
+    margin-right: 10px;
 }
 
 .description {
+    margin-top: 5px;
+
     margin-left: 20px;
 }

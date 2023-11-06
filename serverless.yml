@@ -1,20 +1,24 @@
-service: qwik-lambda-app
+service: qwik-trip-planner
 frameworkVersion: "3"
 
 provider:
   name: aws
   runtime: nodejs18.x
   region: eu-west-1
-  memorySize: 128
+  memorySize: 512
   profile: p-sandbox
-  timeout: 10
-  stage: dev
+  timeout: 30
+  stage: prod
 
 functions:
   qwik:
     handler: server/entry_aws-lambda.qwikApp
+    url:
+      invokeMode: RESPONSE_STREAM
     events:
       - httpApi: "*"
+    environment:
+      OPEN_AI_API_KEY: ${param:OPEN_AI_API_KEY}
 
 custom:
   serverless-offline:

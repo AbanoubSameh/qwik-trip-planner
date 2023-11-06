@@ -10,7 +10,12 @@ export const getOpenAIChatStream = server$(async function* (
 ) {
   const OPEN_AI_API_KEY: string = this.env.get("OPEN_AI_API_KEY") ?? "";
 
-  const { reader } = await initOpenAIChatRequest(OPEN_AI_API_KEY, prompts);
+  const response = await initOpenAIChatRequest(OPEN_AI_API_KEY, prompts);
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+
+  const reader = response.body?.getReader();
 
   let isStillStreaming = true;
   while (reader && isStillStreaming) {
@@ -29,7 +34,7 @@ export const buildGeneratePlanPrompt = (
   <p class="description">{description}</p>
 </div>`;
 
-  const content = `Generate a travel plan to ${data.city} for ${data.duration} days. the response should be in HTML format ${htmlFormat}`;
+  const content = `Generate a travel plan to ${data.city} for ${data.duration} days. the response should be in HTML format ${htmlFormat} with no wrappers or any additional html tags or styles`;
   return { role: "user", content };
 };
 
@@ -42,7 +47,7 @@ const initOpenAIChatRequest = async (
     messages: prompts,
     stream: true,
   });
-  const response = await fetch(`${OPEN_AI_BASE_URL}/chat/completions`, {
+  const response = fetch(`${OPEN_AI_BASE_URL}/chat/completions`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -51,8 +56,7 @@ const initOpenAIChatRequest = async (
     body,
   });
 
-  const reader = response.body?.getReader();
-  return { response, reader };
+  return response;
 };
 
 const mapOpenAIResponse = (openAIResponse: Uint8Array | undefined): string => {
@@ -80,7 +84,7 @@ const mapOpenAIResponse = (openAIResponse: Uint8Array | undefined): string => {
           content += delta;
         }
       } catch (error) {
-        console.error(`unable to parse Open AI respones ${cleanedString}`);
+        console.info(`unable to parse Open AI respones ${cleanedString}`);
       }
     }
   });

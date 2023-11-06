@@ -1,65 +1,39 @@
-# Qwik City App ⚡️
+# Qwik Trip planner App ⚡️
 
-- [Qwik Docs](https://qwik.builder.io/)
-- [Discord](https://qwik.builder.io/chat)
-- [Qwik GitHub](https://github.com/BuilderIO/qwik)
-- [@QwikDev](https://twitter.com/QwikDev)
-- [Vite](https://vitejs.dev/)
+- [Overview](#overview)
+- [Development](#development)
+- [Deployment](#deployment)
 
 ---
 
-## Project Structure
+## Overview
 
-This project is using Qwik with [QwikCity](https://qwik.builder.io/qwikcity/overview/). QwikCity is just an extra set of tools on top of Qwik to make it easier to build a full site, including directory-based routing, layouts, and more.
+This is a demo application using [open-ai](https://platform.openai.com/docs/overview) chat endpoint, [QwikCity](https://qwik.builder.io/qwikcity/overview/) and Http streaming to provide a trip planning web application.
 
-Inside your project, you'll see the following directory structure:
-
-```
-├── public/
-│   └── ...
-└── src/
-    ├── components/
-    │   └── ...
-    └── routes/
-        └── ...
-```
-
-- `src/routes`: Provides the directory-based routing, which can include a hierarchy of `layout.tsx` layout files, and an `index.tsx` file as the page. Additionally, `index.ts` files are endpoints. Please see the [routing docs](https://qwik.builder.io/qwikcity/routing/overview/) for more info.
-
-- `src/components`: Recommended directory for components.
-
-- `public`: Any static assets, like images, can be placed in the public directory. Please see the [Vite public directory](https://vitejs.dev/guide/assets.html#the-public-directory) for more info.
-
-## Add Integrations and deployment
-
-Use the `yarn qwik add` command to add additional integrations. Some examples of integrations includes: Cloudflare, Netlify or Express Server, and the [Static Site Generator (SSG)](https://qwik.builder.io/qwikcity/guides/static-site-generation/).
-
-```shell
-yarn qwik add # or `yarn qwik add`
-```
+![Alt Text](./public/trip-planner.gif)
 
 ## Development
 
 Development mode uses [Vite's development server](https://vitejs.dev/). The `dev` command will server-side render (SSR) the output during development.
 
 ```shell
-npm start # or `yarn start`
+npm dev # or `yarn dev`
 ```
 
-> Note: during dev mode, Vite may request a significant number of `.js` files. This does not represent a Qwik production build.
+> Note: you will need to create `.env.local` file and add `OPEN_AI_API_KEY={OPEN_AI_API_KEY_TOKEN}` to be able to use Open AI endpoints. create a new key using [Open AI API keys](https://platform.openai.com/account/api-keys)
 
-## Preview
+## Deployment
 
-The preview command will create a production build of the client modules, a production build of `src/entry.preview.tsx`, and run a local server. The preview server is only for convenience to preview a production build locally and should not be used as a production server.
+The application is being deployed to AWS using [serverles](https://www.serverless.com/).
+
+### Deploy
 
 ```shell
-yarn preview # or `yarn preview`
+npm deploy --param "OPEN_AI_API_KEY={OPEN_AI_API_KEY_TOKEN}"
 ```
 
-## Production
-
-The production build will generate client and server modules by running both client and server build commands. The build command will use Typescript to run a type check on the source code.
+### Preview locally
 
 ```shell
-yarn build # or `yarn build`
+npm serve --param "OPEN_AI_API_KEY={OPEN_AI_API_KEY_TOKEN}"
 ```
